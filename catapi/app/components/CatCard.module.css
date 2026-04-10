@@ -1,0 +1,42 @@
+.catCard {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: #eee;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.catCard:hover {
+  transform: scale(1.05);
+}
+
+.catImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.catFavBtn {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.catCard:hover .catFavBtn,
+.catFavBtn.active {
+  opacity: 1;
+}
+
+.catFavBtn:hover {
+  transform: scale(1.1);
+}

@@ -2,32 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CatImage, fetchCats } from "../lib/catApi";
-import Icon from "../icons/Icon";
-
-function CatCard({ cat }: { cat: CatImage }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  return (
-    <div className="cat-card">
-      <img src={cat.url} alt="Cat" className="cat-image" loading="lazy" />
-      <button 
-        className="cat-fav-btn"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onClick={() => setIsFavorite(!isFavorite)}
-      >
-        <Icon 
-          name="heart" 
-          width={40} 
-          height={36} 
-          color="#F24E1E" 
-          isFilled={isFavorite || isHovered} 
-        />
-      </button>
-    </div>
-  );
-}
+import { CatCard } from "./CatCard";
+import { useFavorites } from "../context/FavoritesContext";
+import styles from "./CatGrid.module.css";
 
 export default function CatGrid() {
   const [cats, setCats] = useState<CatImage[]>([]);
@@ -36,6 +13,7 @@ export default function CatGrid() {
   const [hasMore, setHasMore] = useState(true);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const loadMore = useCallback(async () => {
     if (loading || !hasMore) return;
@@ -85,15 +63,20 @@ export default function CatGrid() {
 
   return (
     <div>
-      <div className="cat-grid">
+      <div className={styles.catGrid}>
         {cats.map((cat, index) => (
-          <CatCard key={`${cat.id}-${index}`} cat={cat} />
+          <CatCard 
+            key={`${cat.id}-${index}`} 
+            cat={cat} 
+            isFavorite={isFavorite(cat.id)}
+            onToggleFavorite={toggleFavorite}
+          />
         ))}
       </div>
 
-      <div ref={sentinelRef} className="sentinel">
+      <div ref={sentinelRef} className={styles.sentinel}>
         {loading && (
-          <span className="loading-text">... загружаем еще котиков ...</span>
+          <span className={styles.loadingText}>... загружаем еще котиков ...</span>
         )}
       </div>
     </div>

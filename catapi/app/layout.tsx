@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: "Cat API App",
 };
 
+import { FavoritesProvider } from "./context/FavoritesContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.variable}>
       <body>
-        <Header />
-        <main className="main">{children}</main>
+        <FavoritesProvider>
+          <Header />
+          <main className="main">{children}</main>
+        </FavoritesProvider>
       </body>
     </html>
   );

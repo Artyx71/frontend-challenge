@@ -2,22 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import styles from "./Header.module.css";
 
 export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="header">
-      <nav className="nav">
+    <header className={styles.header}>
+      <nav className={styles.nav}>
         <Link
           href="/"
-          className={`nav-link ${pathname === "/" ? "nav-link-active" : ""}`}
+          className={`${styles.navLink} ${pathname === "/" ? styles.navLinkActive : ""}`}
         >
           Все котики
         </Link>
         <Link
           href="/favorites"
-          className={`nav-link ${pathname === "/favorites" ? "nav-link-active" : ""}`}
+          className={`${styles.navLink} ${pathname === "/favorites" ? styles.navLinkActive : ""}`}
         >
           Любимые котики
         </Link>

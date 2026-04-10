@@ -80,6 +80,7 @@ body {
 }
 
 .cat-card {
+  position: relative;
   border-radius: 16px;
   overflow: hidden;
   aspect-ratio: 1;
@@ -97,6 +98,22 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.cat-fav-btn {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 0;
+  transition: transform 0.2s ease;
+}
+
+.cat-fav-btn:hover {
+  transform: scale(1.2);
 }
 
 /* Loader */

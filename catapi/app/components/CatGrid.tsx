@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CatImage, fetchCats } from "../lib/catApi";
+import Icon from "../icons/Icon";
 
 export default function CatGrid() {
   const [cats, setCats] = useState<CatImage[]>([]);
@@ -32,7 +33,7 @@ export default function CatGrid() {
 
   useEffect(() => {
     loadMore();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (observerRef.current) {
@@ -68,6 +69,9 @@ export default function CatGrid() {
               className="cat-image"
               loading="lazy"
             />
+            <button className="cat-fav-btn">
+              <Icon name="heart" width={24} height={24} color="#F24E1E" />
+            </button>
           </div>
         ))}
       </div>

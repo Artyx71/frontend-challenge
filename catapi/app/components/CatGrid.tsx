@@ -4,6 +4,31 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CatImage, fetchCats } from "../lib/catApi";
 import Icon from "../icons/Icon";
 
+function CatCard({ cat }: { cat: CatImage }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  return (
+    <div className="cat-card">
+      <img src={cat.url} alt="Cat" className="cat-image" loading="lazy" />
+      <button 
+        className="cat-fav-btn"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => setIsFavorite(!isFavorite)}
+      >
+        <Icon 
+          name="heart" 
+          width={40} 
+          height={36} 
+          color="#F24E1E" 
+          isFilled={isFavorite || isHovered} 
+        />
+      </button>
+    </div>
+  );
+}
+
 export default function CatGrid() {
   const [cats, setCats] = useState<CatImage[]>([]);
   const [page, setPage] = useState(0);
@@ -62,17 +87,7 @@ export default function CatGrid() {
     <div>
       <div className="cat-grid">
         {cats.map((cat, index) => (
-          <div key={`${cat.id}-${index}`} className="cat-card">
-            <img
-              src={cat.url}
-              alt="Cat"
-              className="cat-image"
-              loading="lazy"
-            />
-            <button className="cat-fav-btn">
-              <Icon name="heart" width={40} height={36} color="#F24E1E" />
-            </button>
-          </div>
+          <CatCard key={`${cat.id}-${index}`} cat={cat} />
         ))}
       </div>
 

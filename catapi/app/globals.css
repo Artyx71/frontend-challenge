@@ -109,11 +109,16 @@ body {
   cursor: pointer;
   padding: 0;
   line-height: 0;
-  transition: transform 0.2s ease;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cat-card:hover .cat-fav-btn {
+  opacity: 1;
 }
 
 .cat-fav-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 /* Loader */

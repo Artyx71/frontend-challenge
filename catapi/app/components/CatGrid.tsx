@@ -70,7 +70,7 @@ export default function CatGrid() {
               loading="lazy"
             />
             <button className="cat-fav-btn">
-              <Icon name="heart" width={24} height={24} color="#F24E1E" />
+              <Icon name="heart" width={40} height={36} color="#F24E1E" />
             </button>
           </div>
         ))}
